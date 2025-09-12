@@ -16196,9 +16196,7 @@ Decoder_decode(Decoder *self, PyObject *const *args, Py_ssize_t nargs)
         state.input_pos = buffer.buf;
         state.input_end = state.input_pos + buffer.len;
 
-        PyObject *res = NULL;
-
-        res = mpack_decode(&state, state.type, NULL, false);
+        PyObject *res = mpack_decode(&state, state.type, NULL, false);
 
         if (res != NULL && mpack_has_trailing_characters(&state)) {
             Py_CLEAR(res);
@@ -19150,8 +19148,8 @@ JSONDecoder_decode(JSONDecoder *self, PyObject *const *args, Py_ssize_t nargs)
         state.input_pos = buffer.buf;
         state.input_end = state.input_pos + buffer.len;
 
-        PyObject *res;
-        res = json_decode(&state, state.type, NULL);
+        PyObject *res = json_decode(&state, state.type, NULL);
+
         if (res != NULL && json_has_trailing_characters(&state)) {
             Py_CLEAR(res);
         }
